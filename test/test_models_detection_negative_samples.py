@@ -14,7 +14,7 @@ class Tester(unittest.TestCase):
     def test_targets_to_anchors(self):
         boxes = torch.zeros((0, 4), dtype=torch.float32)
         negative_target = {"boxes": boxes,
-                           "labels": torch.zeros((1, 1), dtype=torch.int64),
+                           "labels": torch.zeros((0,), dtype=torch.int64),
                            "image_id": 4,
                            "area": (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0]),
                            "iscrowd": torch.zeros((0,), dtype=torch.int64)}
@@ -49,7 +49,7 @@ class Tester(unittest.TestCase):
 
         proposals = [torch.randint(-50, 50, (20, 4), dtype=torch.float32)]
         gt_boxes = [torch.zeros((0, 4), dtype=torch.float32)]
-        gt_labels = [torch.tensor([[0]], dtype=torch.int64)]
+        gt_labels = [torch.tensor([], dtype=torch.int64)]
 
         box_roi_pool = MultiScaleRoIAlign(
             featmap_names=['0', '1', '2', '3'],
@@ -93,7 +93,7 @@ class Tester(unittest.TestCase):
         images = [torch.rand((3, 100, 100), dtype=torch.float32)]
         boxes = torch.zeros((0, 4), dtype=torch.float32)
         negative_target = {"boxes": boxes,
-                           "labels": torch.zeros((1, 1), dtype=torch.int64),
+                           "labels": torch.zeros((0), dtype=torch.int64),
                            "image_id": 4,
                            "area": (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0]),
                            "iscrowd": torch.zeros((0,), dtype=torch.int64)}
